@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -eu
+
+dataset_url="https://www.kaggle.com/api/v1/datasets/download/paultimothymooney/chest-xray-pneumonia"
+dataset_file="$(basename "$dataset_url").zip"
+
+mkdir -p data
+
+[ -s "$dataset_file" ] || curl -L -o "$dataset_file" "$dataset_url"
+
+for name in test train val; do
+	unzip "$dataset_file" "chest_xray/$name/*" -d "data/$name"
+done

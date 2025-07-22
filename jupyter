@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# set -eu
+
+. .venv/bin/activate
+
+exec uv run jupyter notebook "$@"
